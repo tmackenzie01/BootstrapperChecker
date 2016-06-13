@@ -32,6 +32,9 @@ namespace BootstrapperCheckerApp
             foreach (BuildProject project in projects)
             {
                 TreeNode projectNode = new TreeNode(project.ToString());
+                projectNode.Nodes.Add("Present in config");
+                projectNode.Nodes.Add("Artifacts named correctly");
+                projectNode.Nodes.Add("Dependencies match");
                 treeProjects.Nodes.Add(projectNode);
             }
         }
