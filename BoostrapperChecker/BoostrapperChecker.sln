@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoostrapperChecker", "BoostrapperChecker\BoostrapperChecker.csproj", "{47E048D1-E51B-4002-B886-599414904B7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootstrapperCheckerApp", "BootstrapperCheckerApp\BootstrapperCheckerApp.csproj", "{5D8FC830-4DAA-4D4E-A15E-59D287A5C469}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BootstrapperCheckerApp", "BootstrapperCheckerApp\BootstrapperCheckerApp.csproj", "{6F2A38CE-7B88-4E28-BC89-0B63D16FB65D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{47E048D1-E51B-4002-B886-599414904B7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47E048D1-E51B-4002-B886-599414904B7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47E048D1-E51B-4002-B886-599414904B7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5D8FC830-4DAA-4D4E-A15E-59D287A5C469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5D8FC830-4DAA-4D4E-A15E-59D287A5C469}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5D8FC830-4DAA-4D4E-A15E-59D287A5C469}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5D8FC830-4DAA-4D4E-A15E-59D287A5C469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F2A38CE-7B88-4E28-BC89-0B63D16FB65D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F2A38CE-7B88-4E28-BC89-0B63D16FB65D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F2A38CE-7B88-4E28-BC89-0B63D16FB65D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F2A38CE-7B88-4E28-BC89-0B63D16FB65D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
