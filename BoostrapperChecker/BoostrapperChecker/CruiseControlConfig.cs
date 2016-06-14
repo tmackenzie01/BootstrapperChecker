@@ -46,6 +46,7 @@ namespace BoostrapperChecker
                                 if (!IsExemptBootstrapper(projectName))
                                 {
                                     BuildProject newProject = new BuildProject(projectName);
+                                    newProject.Load(boostrapperFile);
                                     projects.Add(newProject);
                                 }
                             }

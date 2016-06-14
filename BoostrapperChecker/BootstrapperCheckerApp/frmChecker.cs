@@ -29,12 +29,30 @@ namespace BootstrapperCheckerApp
             List<BuildProject> projects = m_ccConfig.ReadProjects(ref summaryText);
             
             lblInformation.Text = summaryText;
+            Color nodeColour = Color.Black;
             foreach (BuildProject project in projects)
             {
+                nodeColour = Color.Black;
                 TreeNode projectNode = new TreeNode(project.ToString());
-                projectNode.Nodes.Add("Present in config");
-                projectNode.Nodes.Add("Artifacts named correctly");
-                projectNode.Nodes.Add("Dependencies match");
+                if (!project.IsArtifactsPresent)
+                {
+                    projectNode.Nodes.Add("No artifacts present");
+                    nodeColour = Color.Red;
+                }
+                else
+                {
+                    if (!project.IsOutputArtifactValid)
+                    {
+                        projectNode.Nodes.Add($"Output artifact invalid: ");
+                        nodeColour = Color.Red;
+                    }
+                    else
+                    {
+                        projectNode.Nodes.Add($"Artifacts: {String.Join(",", project.Artifacts)} (output artifact valid)");
+                    }
+                }
+
+                projectNode.ForeColor = nodeColour;
                 treeProjects.Nodes.Add(projectNode);
             }
         }
