@@ -58,6 +58,7 @@ namespace BoostrapperChecker
             // All properties read?
             if (readProperties.Count == interestingProperties.Count)
             {
+                // Artifacts
                 String allArtifacts = readProperties["artifacts"];
 
                 // Artifacts should end with <projectname>Output.txt
@@ -70,6 +71,10 @@ namespace BoostrapperChecker
                     Artifacts.Remove(expectedOutputArtifact);
                     OutputArtifact = expectedOutputArtifact;
                 }
+
+                // Dependencies
+                // Should all end with Output.txt, should refer to valid projects
+                String allDependencies = readProperties["dependencies"];
             }
         }
 
