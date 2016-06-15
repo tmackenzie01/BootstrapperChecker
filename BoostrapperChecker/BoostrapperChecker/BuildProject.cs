@@ -64,6 +64,10 @@ namespace BoostrapperChecker
                 // Dependencies
                 // Should all end with Output.txt, should refer to valid projects
                 String allDependencies = readProperties["dependencies"];
+                Dependencies = allDependencies.Split(',').ToList();
+
+                var sortedDependencies = Dependencies.OrderBy(d => d);
+                DependenciesCorrectOrder = Dependencies.SequenceEqual(sortedDependencies);
             }
         }
 
@@ -84,9 +88,23 @@ namespace BoostrapperChecker
             }
         }
 
+        public bool IsDependenciesPresent
+        {
+            get
+            {
+                return (Dependencies.Count > 0);
+            }
+        }
+
         String m_name;
 
         // Artifacts
         public String OutputArtifact { get; set; }
+
+        // Dependencies
+        public List<String> Dependencies { get; set; }
+
+        // Keeping dependencies in correct order makes it easier not to add duplicates
+        public bool DependenciesCorrectOrder { get; set; }
     }
 }

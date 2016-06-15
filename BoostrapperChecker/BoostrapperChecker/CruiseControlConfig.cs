@@ -70,7 +70,7 @@ namespace BoostrapperChecker
 
         public bool IsExemptBootstrapper(String bootstrapperName)
         {
-            return m_exemptBootstrappers.Contains(bootstrapperName);
+            return (m_exemptBootstrappers.Contains(bootstrapperName) || (bootstrapperName.EndsWith("ReleaseBuild")));
         }
 
         String m_configDirectory;

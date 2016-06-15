@@ -32,8 +32,10 @@ namespace BootstrapperCheckerApp
             Color nodeColour = Color.Black;
             foreach (BuildProject project in projects)
             {
-                nodeColour = Color.Black;
                 TreeNode projectNode = new TreeNode(project.ToString());
+
+                // Artifact sub tree node
+                nodeColour = Color.Black;
                 if (!project.IsArtifactPresent)
                 {
                     projectNode.Nodes.Add("No artifacts present");
@@ -49,6 +51,25 @@ namespace BootstrapperCheckerApp
                     else
                     {
                         projectNode.Nodes.Add("Output artifact valid");
+                    }
+                }
+
+                // Dependencies sub tree node
+                if (!project.IsDependenciesPresent)
+                {
+                    projectNode.Nodes.Add("No dependencies present");
+                    nodeColour = Color.Red;
+                }
+                else
+                {
+                    if (!project.DependenciesCorrectOrder)
+                    {
+                        projectNode.Nodes.Add("Dependencies not in alpabetical order");
+                        nodeColour = Color.Red;
+                    }
+                    else
+                    {
+                        projectNode.Nodes.Add("Dependencies present");
                     }
                 }
 
