@@ -65,8 +65,8 @@ namespace BoostrapperChecker
                 // Should all end with Output.txt, should refer to valid projects
                 String allDependencies = readProperties["dependencies"];
                 Dependencies = allDependencies.Split(',').ToList();
-
                 var sortedDependencies = Dependencies.OrderBy(d => d);
+                DuplicateDependencies = (Dependencies.Distinct().Count() != Dependencies.Count);
                 DependenciesCorrectOrder = Dependencies.SequenceEqual(sortedDependencies);
             }
         }
@@ -106,5 +106,6 @@ namespace BoostrapperChecker
 
         // Keeping dependencies in correct order makes it easier not to add duplicates
         public bool DependenciesCorrectOrder { get; set; }
+        public bool DuplicateDependencies { get; set; }
     }
 }

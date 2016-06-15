@@ -69,7 +69,15 @@ namespace BootstrapperCheckerApp
                     }
                     else
                     {
-                        projectNode.Nodes.Add("Dependencies present");
+                        if (project.DuplicateDependencies)
+                        {
+                            projectNode.Nodes.Add("Duplicate dependency present");
+                            nodeColour = Color.Red;
+                        }
+                        else
+                        {
+                            projectNode.Nodes.Add("Dependencies present");
+                        }
                     }
                 }
 
