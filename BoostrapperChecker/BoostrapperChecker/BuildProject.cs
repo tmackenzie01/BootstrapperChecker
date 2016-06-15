@@ -77,7 +77,12 @@ namespace BoostrapperChecker
             get
             {
                 String expectedOutputArtifact = $"{m_name}Output.txt";
-                return OutputArtifact.Equals(expectedOutputArtifact);
+                if (!String.IsNullOrEmpty(OutputArtifact))
+                {
+                    return OutputArtifact.Equals(expectedOutputArtifact);
+                }
+
+                return false;
             }
         }
 
@@ -93,7 +98,12 @@ namespace BoostrapperChecker
         {
             get
             {
-                return (Dependencies.Count > 0);
+                if (Dependencies != null)
+                {
+                    return (Dependencies.Count > 0);
+                }
+
+                return false;
             }
         }
 
