@@ -10,9 +10,10 @@ namespace BoostrapperChecker
 {
     public class BuildProject
     {
-        public BuildProject(String name)
+        public BuildProject(String name, XmlLoader xmlLoader)
         {
             m_name = name;
+            m_xmlLoader = xmlLoader;
         }
 
         public override string ToString()
@@ -23,7 +24,7 @@ namespace BoostrapperChecker
         // Assumption that filename exists
         public void Load(String filename)
         {
-            String xml = File.ReadAllText(filename);
+            String xml = m_xmlLoader.LoadFromFile(filename);
             List<String> interestingProperties = new List<String>() { "dependencies", "finalOutputArtifact" };
             Dictionary<String, String> readProperties = new Dictionary<String, String>();
 
@@ -97,6 +98,7 @@ namespace BoostrapperChecker
         }
 
         String m_name;
+        XmlLoader m_xmlLoader;
 
         // Artifacts
         public String OutputArtifact { get; set; }

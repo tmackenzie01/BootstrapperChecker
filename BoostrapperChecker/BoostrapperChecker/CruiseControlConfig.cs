@@ -45,7 +45,7 @@ namespace BoostrapperChecker
                                 String projectName = match.Groups["projectName"].Value;
                                 if (!IsExemptBootstrapper(projectName))
                                 {
-                                    BuildProject newProject = new BuildProject(projectName);
+                                    BuildProject newProject = new BuildProject(projectName, new XmlLoader());
                                     newProject.Load(boostrapperFile);
                                     projects.Add(newProject);
                                 }
