@@ -64,8 +64,15 @@ namespace BoostrapperChecker
 
                 // Dependencies
                 // Should all end with Output.txt, should refer to valid projects
+                DependenciesCorrectSpacing = true;
                 String allDependencies = readProperties["dependencies"];
                 Dependencies = allDependencies.Split(',').ToList();
+
+                foreach(String dep in Dependencies)
+                {
+                    DependenciesCorrectSpacing = DependenciesCorrectSpacing && !dep.StartsWith(" ");
+                }
+
                 var sortedDependencies = Dependencies.OrderBy(d => d);
                 DuplicateDependencies = (Dependencies.Distinct().Count() != Dependencies.Count);
                 DependenciesCorrectOrder = Dependencies.SequenceEqual(sortedDependencies);
@@ -117,6 +124,7 @@ namespace BoostrapperChecker
         public List<String> Dependencies { get; set; }
 
         // Keeping dependencies in correct order makes it easier not to add duplicates
+        public bool DependenciesCorrectSpacing { get; set; }
         public bool DependenciesCorrectOrder { get; set; }
         public bool DuplicateDependencies { get; set; }
     }
