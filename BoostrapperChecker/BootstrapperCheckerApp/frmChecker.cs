@@ -27,7 +27,7 @@ namespace BootstrapperCheckerApp
 
             String summaryText = "";
             List<BuildProject> projects = m_ccConfig.ReadProjects(ref summaryText);
-            
+
             lblInformation.Text = summaryText;
             Color nodeColour = Color.Black;
             foreach (BuildProject project in projects)
@@ -76,7 +76,15 @@ namespace BootstrapperCheckerApp
                         }
                         else
                         {
-                            projectNode.Nodes.Add("Dependencies present");
+                            if (!project.DependenciesCorrectSpacing)
+                            {
+                                projectNode.Nodes.Add("Incorrect spacing in dependencies");
+                                nodeColour = Color.Red;
+                            }
+                            else
+                            {
+                                projectNode.Nodes.Add("Dependencies present");
+                            }
                         }
                     }
                 }
