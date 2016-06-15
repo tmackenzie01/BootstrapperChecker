@@ -68,7 +68,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeProjects.Location = new System.Drawing.Point(6, 64);
             this.treeProjects.Name = "treeProjects";
-            this.treeProjects.Size = new System.Drawing.Size(511, 166);
+            this.treeProjects.Size = new System.Drawing.Size(657, 434);
             this.treeProjects.TabIndex = 3;
             // 
             // lblInformation
@@ -84,7 +84,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(529, 236);
+            this.ClientSize = new System.Drawing.Size(675, 504);
             this.Controls.Add(this.lblInformation);
             this.Controls.Add(this.treeProjects);
             this.Controls.Add(this.btnReadProjects);
