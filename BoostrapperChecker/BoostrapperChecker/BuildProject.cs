@@ -10,7 +10,7 @@ namespace BoostrapperChecker
 {
     public class BuildProject
     {
-        public BuildProject(String name, XmlLoader xmlLoader)
+        public BuildProject(String name, IXmlLoader xmlLoader)
         {
             m_name = name;
             m_xmlLoader = xmlLoader;
@@ -98,7 +98,7 @@ namespace BoostrapperChecker
         }
 
         String m_name;
-        XmlLoader m_xmlLoader;
+        IXmlLoader m_xmlLoader;
 
         // Artifacts
         public String OutputArtifact { get; set; }
