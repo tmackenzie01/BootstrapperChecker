@@ -24,7 +24,7 @@ namespace BoostrapperChecker
         public void Load(String filename)
         {
             String xml = File.ReadAllText(filename);
-            List<String> interestingProperties = new List<String>() { "dependencies", "artifacts" };
+            List<String> interestingProperties = new List<String>() { "dependencies", "finalOutputArtifact" };
             Dictionary<String, String> readProperties = new Dictionary<String, String>();
 
             using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
@@ -58,19 +58,8 @@ namespace BoostrapperChecker
             // All properties read?
             if (readProperties.Count == interestingProperties.Count)
             {
-                // Artifacts
-                String allArtifacts = readProperties["artifacts"];
-
-                // Artifacts should end with <projectname>Output.txt
-                String expectedOutputArtifact = $"{m_name}Output.txt";
-                if (allArtifacts.EndsWith(expectedOutputArtifact))
-                {
-                    Artifacts = allArtifacts.Split(',').ToList();
-
-                    // Remove expected artifact
-                    Artifacts.Remove(expectedOutputArtifact);
-                    OutputArtifact = expectedOutputArtifact;
-                }
+                // Artifact
+                OutputArtifact = readProperties["finalOutputArtifact"];
 
                 // Dependencies
                 // Should all end with Output.txt, should refer to valid projects
@@ -82,22 +71,22 @@ namespace BoostrapperChecker
         {
             get
             {
-                return !String.IsNullOrEmpty(OutputArtifact);
+                String expectedOutputArtifact = $"{m_name}Output.txt";
+                return OutputArtifact.Equals(expectedOutputArtifact);
             }
         }
 
-        public bool IsArtifactsPresent
+        public bool IsArtifactPresent
         {
             get
             {
-                return (Artifacts?.Count > 0);
+                return !String.IsNullOrEmpty(OutputArtifact);
             }
-        }        
+        }
 
         String m_name;
 
         // Artifacts
         public String OutputArtifact { get; set; }
-        public List<String> Artifacts { get; set; }
     }
 }

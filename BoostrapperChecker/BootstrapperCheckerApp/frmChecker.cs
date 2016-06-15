@@ -34,7 +34,7 @@ namespace BootstrapperCheckerApp
             {
                 nodeColour = Color.Black;
                 TreeNode projectNode = new TreeNode(project.ToString());
-                if (!project.IsArtifactsPresent)
+                if (!project.IsArtifactPresent)
                 {
                     projectNode.Nodes.Add("No artifacts present");
                     nodeColour = Color.Red;
@@ -43,12 +43,12 @@ namespace BootstrapperCheckerApp
                 {
                     if (!project.IsOutputArtifactValid)
                     {
-                        projectNode.Nodes.Add($"Output artifact invalid: ");
+                        projectNode.Nodes.Add($"Output artifact invalid");
                         nodeColour = Color.Red;
                     }
                     else
                     {
-                        projectNode.Nodes.Add($"Artifacts: {String.Join(",", project.Artifacts)} (output artifact valid)");
+                        projectNode.Nodes.Add("Output artifact valid");
                     }
                 }
 
