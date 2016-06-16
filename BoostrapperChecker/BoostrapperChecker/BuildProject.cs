@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -123,6 +124,14 @@ namespace BoostrapperChecker
             }
         }
 
+        public ProjectTitle Title
+        {
+            get
+            {
+                return m_title;
+            }
+        }
+
         ProjectTitle m_title;
         IXmlLoader m_xmlLoader;
 
@@ -136,5 +145,48 @@ namespace BoostrapperChecker
         public bool DependenciesCorrectSpacing { get; set; }
         public bool DependenciesCorrectOrder { get; set; }
         public bool DuplicateDependencies { get; set; }
+    }
+
+    public class BuildProjectDependencyComparer : IComparer<BuildProject>
+    {
+        public BuildProjectDependencyComparer(List<ProjectTitle> preferredOrder)
+        {
+            int i = 0;
+            m_preferredOrder = new Dictionary<ProjectTitle, int>();
+            foreach ( ProjectTitle title in preferredOrder)
+            {
+                m_preferredOrder[title] = i++;
+            }
+        }
+
+        public int Compare(BuildProject x, BuildProject y)
+        {
+            int result = CompareEx(x, y);
+
+            if (result == 0)
+            {
+                Debug.WriteLine($"{x} == {y}");
+            }
+            else if (result < 0)
+            {
+                Debug.WriteLine($"{x} < {y}");
+            }
+            else // if (result < 0)
+            {
+                Debug.WriteLine($"{x} > {y}");
+            }
+
+            return result;
+        }
+
+        public int CompareEx(BuildProject x, BuildProject y)
+        {
+            int xPos = m_preferredOrder[x.Title];
+            int yPos = m_preferredOrder[y.Title];
+
+            return xPos.CompareTo(yPos);
+        }
+
+        Dictionary<ProjectTitle, int> m_preferredOrder;
     }
 }
