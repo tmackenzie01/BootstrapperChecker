@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BoostrapperChecker
 {
-    public class ProjectTitle : IComparable, IEquatable<ProjectTitle>
+    public class ProjectTitle : Comparer<ProjectTitle>, IEquatable<ProjectTitle>, IComparable
     {
         public ProjectTitle(String name)
         {
@@ -14,7 +14,25 @@ namespace BoostrapperChecker
             CorrectSpacing = !name.StartsWith(" ");
         }
 
+        public override string ToString()
+        {
+            return Name;
+        }
+
         // For equality
+        public override bool Equals(Object other)
+        {
+            if (other != null)
+            {
+                if (other is ProjectTitle)
+                {
+                    return Equals((ProjectTitle)other);
+                }
+            }
+
+            return false;
+        }
+
         public bool Equals(ProjectTitle other)
         {
             if (other != null)
@@ -41,6 +59,11 @@ namespace BoostrapperChecker
         public override int GetHashCode()
         {
             return Name.GetHashCode();
+        }
+
+        public override int Compare(ProjectTitle x, ProjectTitle y)
+        {
+            return x.Name.CompareTo(y);
         }
 
         // For ordering
