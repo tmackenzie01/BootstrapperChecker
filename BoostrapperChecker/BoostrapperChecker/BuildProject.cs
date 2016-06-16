@@ -12,13 +12,13 @@ namespace BoostrapperChecker
     {
         public BuildProject(String name, IXmlLoader xmlLoader)
         {
-            m_name = name;
+            m_title = new ProjectTitle(name);
             m_xmlLoader = xmlLoader;
         }
 
         public override string ToString()
         {
-            return m_name;
+            return m_title.Name;
         }
 
         // Assumption that filename exists
@@ -66,11 +66,11 @@ namespace BoostrapperChecker
                 // Should all end with Output.txt, should refer to valid projects
                 DependenciesCorrectSpacing = true;
                 String allDependencies = readProperties["dependencies"];
-                Dependencies = allDependencies.Split(',').ToList();
+                Dependencies = allDependencies.Split(',').ToList().ConvertAll(t => new ProjectTitle(t));
 
-                foreach(String dep in Dependencies)
+                foreach(ProjectTitle dep in Dependencies)
                 {
-                    DependenciesCorrectSpacing = DependenciesCorrectSpacing && !dep.StartsWith(" ");
+                    DependenciesCorrectSpacing = DependenciesCorrectSpacing && dep.CorrectSpacing;
                 }
 
                 var sortedDependencies = Dependencies.OrderBy(d => d);
@@ -83,7 +83,7 @@ namespace BoostrapperChecker
         {
             get
             {
-                String expectedOutputArtifact = $"{m_name}Output.txt";
+                String expectedOutputArtifact = $"{m_title.Name}Output.txt";
                 if (!String.IsNullOrEmpty(OutputArtifact))
                 {
                     return OutputArtifact.Equals(expectedOutputArtifact);
@@ -114,14 +114,14 @@ namespace BoostrapperChecker
             }
         }
 
-        String m_name;
+        ProjectTitle m_title;
         IXmlLoader m_xmlLoader;
 
         // Artifacts
         public String OutputArtifact { get; set; }
 
         // Dependencies
-        public List<String> Dependencies { get; set; }
+        public List<ProjectTitle> Dependencies { get; set; }
 
         // Keeping dependencies in correct order makes it easier not to add duplicates
         public bool DependenciesCorrectSpacing { get; set; }
