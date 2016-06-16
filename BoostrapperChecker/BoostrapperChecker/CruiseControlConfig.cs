@@ -156,6 +156,10 @@ namespace BoostrapperChecker
             }
             finalProjects.Sort(new BuildProjectDependencyComparer(finalProjectOrder));
 
+            // TODO We can confirm this order is correct
+            // Starting at bottom of the list, get the BuildProjects title, then search for that in all the projects above dependencies
+            // if we find the title then the project depends on an earlier project
+
             return finalProjects;
         }
 
