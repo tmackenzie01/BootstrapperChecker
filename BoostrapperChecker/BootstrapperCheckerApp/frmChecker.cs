@@ -83,7 +83,7 @@ namespace BootstrapperCheckerApp
                             }
                             else
                             {
-                                projectNode.Nodes.Add("Dependencies present");
+                                projectNode.Nodes.Add($"Dependencies present ({String.Join(",", project.Dependencies)})");
                             }
                         }
                     }
