@@ -26,6 +26,18 @@ namespace BoostrapperChecker
             return false;
         }
 
+        // For equality
+        public bool Equals(String other)
+        {
+            if (other != null)
+            {
+                // Name is the only thing that matters
+                return Name.Equals(other);
+            }
+
+            return false;
+        }
+
         public override int GetHashCode()
         {
             return Name.GetHashCode();
@@ -52,5 +64,35 @@ namespace BoostrapperChecker
 
         public bool CorrectSpacing { get; set; }
         public String Name { get; set; }
+    }
+
+    public class ProjectTitleComparer : IComparer<ProjectTitle>
+    {
+        public int Compare(ProjectTitle x, ProjectTitle y)
+        {
+            // Dependencies is always first
+            // Installs is always second
+
+            if (x.Equals("Dependencies"))
+            {
+                return -1;
+            }
+            if (y.Equals("Dependencies"))
+            {
+                return 1;
+            }
+
+            // We've elimintated Dependencies at this point, do the same for Installs
+            if (x.Equals("Installs"))
+            {
+                return -1;
+            }
+            if (y.Equals("Installs"))
+            {
+                return 1;
+            }
+
+            return x.CompareTo(y);
+        }
     }
 }
