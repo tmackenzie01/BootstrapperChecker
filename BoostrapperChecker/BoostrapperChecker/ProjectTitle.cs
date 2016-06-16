@@ -98,20 +98,24 @@ namespace BoostrapperChecker
 
             if (x.Equals("Dependencies"))
             {
+                // x is before
                 return -1;
             }
             if (y.Equals("Dependencies"))
             {
+                // y is after
                 return 1;
             }
 
             // We've elimintated Dependencies at this point, do the same for Installs
             if (x.Equals("Installs"))
             {
+                // x is before
                 return -1;
             }
             if (y.Equals("Installs"))
             {
+                // y is after
                 return 1;
             }
 
