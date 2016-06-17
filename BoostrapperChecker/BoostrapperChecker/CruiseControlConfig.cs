@@ -18,6 +18,8 @@ namespace BoostrapperChecker
 
         public List<BuildProject> ReadProjects(ref String summaryText)
         {
+            // 1 Load bootstrappers
+
             // TODO Because Clone() is a bit of a nightmare I'm going to build 2 lists, one for the final return object and another which is the same but we can modify
             // We should really make one list and then clone it before we try and work out the dependency order
             List<BuildProject> modifiableProjects = new List<BuildProject>();
@@ -76,9 +78,23 @@ namespace BoostrapperChecker
                 }
             }
 
+            List<ProjectTitle> finalProjectOrder = null;
+            OrderProjectsByDependencies(ref modifiableProjects, ref finalProjectOrder);
+
+            finalProjects.Sort(new BuildProjectDependencyComparer(finalProjectOrder));
+
+            // TODO We can confirm this order is correct
+            // Starting at bottom of the list, get the BuildProjects title, then search for that in all the projects above dependencies
+            // if we find the title then the project depends on an earlier project
+
+            return finalProjects;
+        }
+
+        private void OrderProjectsByDependencies(ref List<BuildProject> modifiableProjects, ref List<ProjectTitle> finalProjectOrder)
+        {
             // Now work out order based on dependencies
             // This will be the final order - list of project titles
-            List<ProjectTitle> finalProjectOrder = new List<ProjectTitle>();
+            finalProjectOrder = new List<ProjectTitle>();
 
             // Projects with no dependents that we build up each time round a loop
             List<BuildProject> projectsWithNoDependents = new List<BuildProject>();
@@ -154,13 +170,6 @@ namespace BoostrapperChecker
             {
                 throw new Exception("Algorithm to calculate project order based on dependencies is broken");
             }
-            finalProjects.Sort(new BuildProjectDependencyComparer(finalProjectOrder));
-
-            // TODO We can confirm this order is correct
-            // Starting at bottom of the list, get the BuildProjects title, then search for that in all the projects above dependencies
-            // if we find the title then the project depends on an earlier project
-
-            return finalProjects;
         }
 
         public bool IsExemptBootstrapper(String bootstrapperName)
