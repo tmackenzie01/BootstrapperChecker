@@ -87,6 +87,21 @@ namespace BoostrapperChecker
             // Starting at bottom of the list, get the BuildProjects title, then search for that in all the projects above dependencies
             // if we find the title then the project depends on an earlier project
 
+            List<ConfigFile> configs = new List<ConfigFile>();
+            ConfigFile ccConfig = new ConfigFile(new XmlLoader());
+
+            ccConfig.Read(Path.Combine(m_configDirectory, "config.xml"));
+            configs.Add(ccConfig);
+
+            foreach (String ccConfigInclude in ccConfig.Includes)
+            {
+                ConfigFile newConfig = new ConfigFile(new XmlLoader());
+                newConfig.Read(ccConfigInclude);
+                configs.Add(newConfig);
+            }
+
+            // Now cross-reference finalProjects and configProjects
+
             return finalProjects;
         }
 

@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigFile.cs" />
+    <Compile Include="ConfigProject.cs" />
     <Compile Include="CruiseControlConfig.cs" />
     <Compile Include="BuildProject.cs" />
     <Compile Include="ProjectTitle.cs" />
