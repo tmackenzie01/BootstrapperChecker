@@ -33,6 +33,8 @@
             this.btnReadProjects = new System.Windows.Forms.Button();
             this.treeProjects = new System.Windows.Forms.TreeView();
             this.lblInformation = new System.Windows.Forms.Label();
+            this.txtWorkingCopiesFolder = new System.Windows.Forms.TextBox();
+            this.lblWorkingCopies = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtFolder
@@ -53,7 +55,7 @@
             // 
             // btnReadProjects
             // 
-            this.btnReadProjects.Location = new System.Drawing.Point(429, 10);
+            this.btnReadProjects.Location = new System.Drawing.Point(573, 54);
             this.btnReadProjects.Name = "btnReadProjects";
             this.btnReadProjects.Size = new System.Drawing.Size(90, 23);
             this.btnReadProjects.TabIndex = 2;
@@ -66,9 +68,9 @@
             this.treeProjects.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeProjects.Location = new System.Drawing.Point(6, 64);
+            this.treeProjects.Location = new System.Drawing.Point(6, 99);
             this.treeProjects.Name = "treeProjects";
-            this.treeProjects.Size = new System.Drawing.Size(657, 434);
+            this.treeProjects.Size = new System.Drawing.Size(657, 399);
             this.treeProjects.TabIndex = 3;
             // 
             // lblInformation
@@ -80,6 +82,22 @@
             this.lblInformation.TabIndex = 4;
             this.lblInformation.Text = "Information";
             // 
+            // txtWorkingCopiesFolder
+            // 
+            this.txtWorkingCopiesFolder.Location = new System.Drawing.Point(139, 56);
+            this.txtWorkingCopiesFolder.Name = "txtWorkingCopiesFolder";
+            this.txtWorkingCopiesFolder.Size = new System.Drawing.Size(284, 20);
+            this.txtWorkingCopiesFolder.TabIndex = 0;
+            // 
+            // lblWorkingCopies
+            // 
+            this.lblWorkingCopies.AutoSize = true;
+            this.lblWorkingCopies.Location = new System.Drawing.Point(3, 59);
+            this.lblWorkingCopies.Name = "lblWorkingCopies";
+            this.lblWorkingCopies.Size = new System.Drawing.Size(114, 13);
+            this.lblWorkingCopies.TabIndex = 1;
+            this.lblWorkingCopies.Text = "Project working copies";
+            // 
             // frmChecker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -88,7 +106,9 @@
             this.Controls.Add(this.lblInformation);
             this.Controls.Add(this.treeProjects);
             this.Controls.Add(this.btnReadProjects);
+            this.Controls.Add(this.lblWorkingCopies);
             this.Controls.Add(this.lblFolder);
+            this.Controls.Add(this.txtWorkingCopiesFolder);
             this.Controls.Add(this.txtFolder);
             this.Name = "frmChecker";
             this.Text = "frmChecker";
@@ -104,5 +124,7 @@
         private System.Windows.Forms.Button btnReadProjects;
         private System.Windows.Forms.TreeView treeProjects;
         private System.Windows.Forms.Label lblInformation;
+        private System.Windows.Forms.TextBox txtWorkingCopiesFolder;
+        private System.Windows.Forms.Label lblWorkingCopies;
     }
 }

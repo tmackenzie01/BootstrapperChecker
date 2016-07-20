@@ -17,6 +17,7 @@ namespace BootstrapperCheckerApp
         {
             InitializeComponent();
             txtFolder.Text = @"D:\CodeSandbox\CruiseControlConfig_trunk";
+            txtWorkingCopiesFolder.Text = @"D:\CodeSandbox";
             lblInformation.Text = "";
         }
 
@@ -27,11 +28,21 @@ namespace BootstrapperCheckerApp
 
             String summaryText = "";
             List<BuildProject> projects = m_ccConfig.ReadProjects(ref summaryText);
+            List<VSSolution> solutions = new List<VSSolution>();
 
             lblInformation.Text = summaryText;
             Color nodeColour = Color.Black;
             foreach (BuildProject project in projects)
             {
+                // Add the solution - should be located in <Working copies dir>\<project name>_trunk
+                String predictedWorkingCopyDir = System.IO.Path.Combine(txtWorkingCopiesFolder.Text, $"{ project.ToString()}_trunk");
+                VSSolution tempSolution = new VSSolution(project.ToString(), predictedWorkingCopyDir);
+                tempSolution.ParseSolution();
+
+                solutions.Add(tempSolution);
+
+                // TODO Think we'll add the solution onto the actual project (AttachSolution method or property) but for now just build a list
+                
                 TreeNode projectNode = new TreeNode(project.ToString());
 
                 // Artifact sub tree node
