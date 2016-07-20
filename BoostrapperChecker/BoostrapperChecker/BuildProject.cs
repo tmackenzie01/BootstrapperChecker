@@ -25,36 +25,23 @@ namespace BoostrapperChecker
         // Assumption that filename exists
         public void Load(String filename)
         {
-            String xml = m_xmlLoader.LoadFromFile(filename);
+            String xmlText = m_xmlLoader.LoadFromFile(filename);
             List<String> interestingProperties = new List<String>() { "dependencies", "finalOutputArtifact" };
             Dictionary<String, String> readProperties = new Dictionary<String, String>();
 
-            using (XmlReader reader = XmlReader.Create(new StringReader(xml)))
-            {
-                reader.ReadToDescendant("property");
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xmlText);
+            XmlNodeList dependenciesNodes = xmlDoc.SelectNodes("project/property[@name='dependencies']");
+            XmlNodeList finalOutputArtifactNodes = xmlDoc.SelectNodes("project/property[@name='finalOutputArtifact']");
 
-                do
-                {
-                    switch (reader.NodeType)
-                    {
-                        case XmlNodeType.Element:
-                            // Check for dependencies, artifacts, externals
-                            while (reader.MoveToNextAttribute())
-                            {
-                                if (interestingProperties.Contains(reader.Value))
-                                {
-                                    String thisProperty = reader.Value;
-                                    reader.MoveToNextAttribute();
-                                    readProperties[thisProperty] = reader.Value;
-                                }
-                            }
-                            break;
-                        case XmlNodeType.Text:
-                        case XmlNodeType.EndElement:
-                            // Don't care about these
-                            break;
-                    }
-                } while (reader.Read());
+            // Should only find one of each property declaration for dependencies & finalOutputArtifact
+            if (dependenciesNodes.Count == 1)
+            {
+                readProperties["dependencies"] = dependenciesNodes[0].Attributes["value"].Value;
+            }
+            if (finalOutputArtifactNodes.Count == 1)
+            {
+                readProperties["finalOutputArtifact"] = finalOutputArtifactNodes[0].Attributes["value"].Value;
             }
 
             // All properties read?
